@@ -1,0 +1,85 @@
+estado_temperatura = None
+estado_humedad = None
+
+def action(msg):
+    global estado_medico
+    global estado_temperatura
+    global estado_humedad
+
+    chat_id = msg['chat']['id']
+    command = msg['text'].lower()  # Convertir a minúsculas
+
+    # envio mi comando a guardar en txt
+    interaccion('Usuario', command)
+    print("Telegram: ", command)
+
+    if 'hola' in command:
+        telegram_view.send_message(chat_id,
+            "¡Hola! Soy Robot, escribe 'menu' para ver las opciones."
+        )
+        interaccion("Bot",
+            "¡Hola! Soy Robot, escribe 'menu' para ver las opciones."
+        )
+
+    elif 'menu' in command:
+        menu = """
+Selecciona una opción:
+  a) Robot Led
+  b) Robot Explorador
+  c) Robot Medico
+"""
+        telegram_view.send_message(chat_id, menu)
+        interaccion("Bot", menu)
+
+    elif command == 'a':
+        telegram_view.send_message(chat_id, "Iniciando Robot Led...")
+        interaccion("Bot", "Iniciando Robot Led...")
+
+        led.switch()
+
+        telegram_view.send_message(chat_id, "Se ha completado la secuencia del Robot Led.")
+        interaccion("Bot", "Se ha completado la secuencia del Robot Led.")
+
+    elif command == 'b':
+        telegram_view.send_message(chat_id, "Iniciando Robot Explorador...")
+        interaccion("Bot", "Iniciando Robot Explorador...")
+
+        telegram_view.send_message(
+            chat_id,
+            "¡No olvide presionar el botón i para iniciar el recorrido!"
+        )
+        interaccion("Bot", "¡No olvide presionar el botón i para iniciar el recorrido!")
+
+        while explorador.get_gpio().input(explorador.get_boton_pin()):
+            time.sleep(0.1)
+
+        explorador.get_gpio().output(explorador.get_led_pin(), True)
+
+        k = explorador.robot_explorador(telegram_view, chat_id)
+
+        telegram_view.send_message(
+            chat_id,
+            f"Exploración completada en {k} segundos."
+        )
+        interaccion("Bot", f"Exploración completada en {k} segundos.")
+
+        explorador.get_gpio().output(explorador.get_led_pin(), False)
+
+    elif command == 'c':
+        telegram_view.send_message(chat_id, "Iniciando Robot Medico...")
+        interaccion("Bot", "Iniciando Robot Medico...")
+
+        time.sleep(1)
+
+        menu_medico = """
+Selecciona una opción para el Robot Medico:
+  t) Temperatura
+  h) Humedad
+"""
+        telegram_view.send_message(chat_id, menu_medico)
+        interaccion("Bot", menu_medico)
+
+        estado_medico = "esperando_opcion"
+
+    elif 'status' in command:
+        pass

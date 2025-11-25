@@ -1,0 +1,35 @@
+class MiClase:
+    pass
+
+obj1 = MiClase()
+CARBON = MiClase()
+Shaggy = MiClase()
+DiegoMauricioAliasElChasi = MiClase()
+MyLittlePony = MiClase()
+
+class fieles:
+    pass
+
+Anthony = fieles()
+Cinthya = fieles()
+
+class Robot:
+    def __init__(self, nombre, tipo, tarea):
+        self.nombre = nombre
+        self.tipo = tipo
+        self.tarea = tarea
+
+    def adelante(self):
+        pass
+
+    def atras(self):
+        pass
+
+    def giroizq(self):
+        pass
+
+    def girode(self):
+        pass
+
+avenger = Robot("Avenger", "Batalla", "Combatir")
+print(avenger.nombre)

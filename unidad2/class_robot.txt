@@ -1,0 +1,71 @@
+class Robot:
+    def __init__(self, nombre, modelo):
+        self.nombre = nombre
+        self.modelo = modelo
+
+    def encender(self):
+        print(f"{self.nombre} esta encendido...")
+
+    def apagar(self):
+        print(f"{self.nombre} esta apagado...")
+
+    def estado(self):
+        print(f"Robot: {self.nombre}, modelo: {self.modelo}")
+
+
+class robot_exp(Robot):
+    def __init__(self, nombre, modelo, zona_exp):
+        super().__init__(nombre, modelo)
+        self.zona_exp = zona_exp
+
+    def explorar(self):
+        print(f"{self.nombre} esta explorando la zona: {self.zona_exp}")
+
+
+class robot_obr(Robot):
+    def __init__(self, nombre, modelo, tarea):
+        super().__init__(nombre, modelo)
+        self.tarea = tarea
+
+    def trabajar(self):
+        print(f"{self.nombre} esta realizando la tarea: {self.tarea}")
+
+
+class Robot_medico(Robot):
+    def __init__(self, nombre, modelo, especialidad):
+        super().__init__(nombre, modelo)
+        self.especialidad = especialidad
+
+    def diagnosticar(self):
+        print(f"{self.nombre} realizando diagnostico: {self.especialidad}")
+
+
+def simulacion():
+    exp = robot_exp("Colon", "SO.01", "Quito")
+    obrero = robot_obr("Mecanico", "R.34D", "Construir puente")
+    medico = Robot_medico("Rambo", "X-428.2", "Traumatologia")
+
+    medico.encender()
+    medico.estado()
+    medico.diagnosticar()
+    medico.apagar()
+    print("-----")
+
+    exp.encender()
+    exp.estado()
+    exp.explorar()
+    exp.apagar()
+    print("-----")
+
+    obrero.encender()
+    obrero.estado()
+    obrero.trabajar()
+    obrero.apagar()
+
+
+simulacion()
+
+import time
+import os
+time.sleep(5)
+os.system("cls")
