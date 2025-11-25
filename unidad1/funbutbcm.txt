@@ -1,0 +1,16 @@
+import RPi.GPIO as GPIO
+import time
+
+def butbcm(foco, but):
+    GPIO.setwarnings(False)
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(foco, GPIO.OUT)
+    GPIO.setup(but, GPIO.IN)
+
+    while True:
+        if GPIO.input(but):
+            GPIO.output(foco, False)
+        else:
+            GPIO.output(foco, True)
+
+butbcm(18, 25)

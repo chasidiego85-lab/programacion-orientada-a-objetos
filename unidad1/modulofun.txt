@@ -1,0 +1,39 @@
+def fun_led():
+    import ledbcm
+    return
+
+def fun_led2():
+    import ledboard
+    return
+
+def fun_but():
+    print("NO OLVIDE PRESIONAR EL BOTON !!")
+    import funbutbcm
+    return
+
+def fun_but2():
+    print("NO OLVIDE PRESIONAR EL BOTON!!")
+    import funbutboard
+    return
+
+while True:
+    op = 0
+    print("hola, seleccione el proyecto a ejecutar:\n")
+    print("1) Led bcm  2) Led Board  3) Boton Bcm  4) Boton Board")
+    op = int(input("op= "))
+
+    if op == 1:
+        print("**** LED CON BCM ****\n")
+        pro_1()
+
+    if op == 2:
+        print("**** LED CON BOARD ****\n")
+        pro_2()
+
+    if op == 3:
+        print("**** BOTON CON BCM ****\n")
+        pro_3()
+
+    if op == 4:
+        print("**** BOTON CON BOARD ****\n")
+        fun_but2()
